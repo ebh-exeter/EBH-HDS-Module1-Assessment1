@@ -1,0 +1,30 @@
+// Use DBML to define your database structure
+// Docs: https://dbml.dbdiagram.io/docs
+
+Table hospitals {
+  hopital_id integer [primary key]
+  name varchar
+  address varchar
+  size integer
+  type varchar
+  acceditation_status varchar
+}
+Table people {
+  person_id integer [primary key]
+  name varchar
+  date_of_birth date
+  address varchar
+  role varchar
+  registered_id integer
+}
+Table prescription {
+  prescription_id integer [primary key]
+  patient_id integer
+  doctor_id integer
+  medication varchar
+  prescription_date date
+}
+Ref: "people"."registered_id" > "people"."person_id"
+Ref: "people"."registered_id" > "hospitals"."hopital_id"
+Ref: "prescription"."patient_id" > "people"."person_id"
+Ref: "prescription"."doctor_id" > "people"."person_id"
