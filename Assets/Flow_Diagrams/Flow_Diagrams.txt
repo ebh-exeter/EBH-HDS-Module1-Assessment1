@@ -1,0 +1,1 @@
+This Folder is for the 8 Flow Diagrams describing the scripts for creating, populating and querying the Database.
