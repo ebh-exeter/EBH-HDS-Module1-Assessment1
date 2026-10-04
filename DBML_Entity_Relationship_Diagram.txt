@@ -3,9 +3,9 @@
 
 Table hospitals {
   hospital_id integer [primary key]
-  name varchar
+  hospital_name varchar
   address varchar
-  size integer
+  bed_count integer
   type varchar
   accreditation_status varchar
 }
@@ -17,7 +17,7 @@ Table people {
   role varchar
   registered_id integer
 }
-Table prescription {
+Table prescriptions {
   prescription_id integer [primary key]
   patient_id integer
   doctor_id integer
@@ -26,5 +26,5 @@ Table prescription {
 }
 Ref: "people"."registered_id" > "people"."person_id"
 Ref: "people"."registered_id" > "hospitals"."hospital_id"
-Ref: "prescription"."patient_id" > "people"."person_id"
-Ref: "prescription"."doctor_id" > "people"."person_id"
+Ref: "prescriptions"."patient_id" > "people"."person_id"
+Ref: "prescriptions"."doctor_id" > "people"."person_id"
