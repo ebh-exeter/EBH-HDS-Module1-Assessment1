@@ -44,13 +44,13 @@ if [[ "$dbSearch" == "HospitalNetworkDB" ]]; then
 
       # People Table - Doctors
 
-      mysql --local-infile=1 -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA LOCAL INFILE '~/assessments/hpdm206Z/assessment1/doctors.csv' INTO TABLE people FIELDS TERMINATED BY ',' ENCLOSED BY '\"' IGNORE 1 LINES (person_id, name, date_of_birth, address, role, registered_id);" 2>/dev/null
+      mysql --local-infile=1 -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA LOCAL INFILE '~/assessments/hpdm206Z/assessment1/doctors.csv' INTO TABLE people FIELDS TERMINATED BY ',' ENCLOSED BY '\"' IGNORE 1 LINES (person_id, name, date_of_birth, address, role, hospital_id);" 2>/dev/null
       echo "Doctor rows inserted: "
       mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -BNe "SELECT COUNT(1) FROM people WHERE role = 'Doctor';" 2>/dev/null
 
       # People Table - Patients
 
-      mysql --local-infile=1 -u$USERNAME -p$PASSWORD HospitalNetworkDB -BNe "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA LOCAL INFILE '~/assessments/hpdm206Z/assessment1/patients.csv' INTO TABLE people FIELDS TERMINATED BY ',' ENCLOSED BY '\"' IGNORE 1 LINES (person_id, name, date_of_birth, address, role, registered_id);" 2>/dev/null
+      mysql --local-infile=1 -u$USERNAME -p$PASSWORD HospitalNetworkDB -BNe "SET FOREIGN_KEY_CHECKS = 0; LOAD DATA LOCAL INFILE '~/assessments/hpdm206Z/assessment1/patients.csv' INTO TABLE people FIELDS TERMINATED BY ',' ENCLOSED BY '\"' IGNORE 1 LINES (person_id, name, date_of_birth, address, role, doctor_id);" 2>/dev/null
       echo "Patient rows inserted: "
       mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -BNe "SELECT COUNT(1) FROM people WHERE role = 'Patient';" 2>/dev/null
 
