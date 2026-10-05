@@ -27,7 +27,7 @@ mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "DESCRIBE hospitals;" 2>/dev/
 # -------------------------------------------------------------------------------------------
 # Create people Table
 
-mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "CREATE TABLE people (person_id INT NOT NULL, name VARCHAR(100) NOT NULL, date_of_birth DATE NOT NULL, address VARCHAR(200) NOT NULL, role VARCHAR(20) NOT NULL, doctor_id INT, hospital_id INT, PRIMARY KEY (person_id));" 2>/dev/null
+mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "CREATE TABLE people (person_id INT NOT NULL, name VARCHAR(100) NOT NULL, date_of_birth DATE NOT NULL, address VARCHAR(200) NOT NULL, role VARCHAR(20) NOT NULL, registered_id INT NOT NULL, PRIMARY KEY (person_id));" 2>/dev/null
 
 echo "Schema updated - people table added."
 mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "DESCRIBE people;" 2>/dev/null
@@ -46,11 +46,11 @@ mysql -u$USERNAME -p$PASSWORD HospitalNetworkDB -e "DESCRIBE prescriptions;" 2>/
 
 # people.registered_id reference people.person_id This is for Patients registered Doctor
 
-mysql -u$USERNAME  -p$PASSWORD  HospitalNetworkDB -e "ALTER TABLE people ADD CONSTRAINT fk_doctor FOREIGN KEY (doctor_id) REFERENCES people (person_id);" 2>/dev/null
+mysql -u$USERNAME  -p$PASSWORD  HospitalNetworkDB -e "ALTER TABLE people ADD CONSTRAINT fk_doctor FOREIGN KEY (registered_id) REFERENCES people (person_id);" 2>/dev/null
 
 # people.registered_id reference hospitals.hospital_id THis is for Doctors registered Hospital
 
-mysql -u$USERNAME  -p$PASSWORD  HospitalNetworkDB -e "ALTER TABLE people ADD CONSTRAINT fk_hospital FOREIGN KEY (hospital_id) REFERENCES hospitals (hospital_id);" 2>/dev/null
+mysql -u$USERNAME  -p$PASSWORD  HospitalNetworkDB -e "ALTER TABLE people ADD CONSTRAINT fk_hospital FOREIGN KEY (registered_id) REFERENCES hospitals (hospital_id);" 2>/dev/null
 
 # prescription.patient_id references people.person_id This is the patient hook
 
