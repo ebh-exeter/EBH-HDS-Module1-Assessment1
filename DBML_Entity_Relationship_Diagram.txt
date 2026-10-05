@@ -15,7 +15,8 @@ Table people {
   date_of_birth date
   address varchar
   role varchar
-  registered_id integer
+  doctor_id integer
+  hospital_id integer
 }
 Table prescriptions {
   prescription_id integer [primary key]
@@ -24,7 +25,7 @@ Table prescriptions {
   medication varchar
   prescription_date date
 }
-Ref: "people"."registered_id" > "people"."person_id"
-Ref: "people"."registered_id" > "hospitals"."hospital_id"
+Ref: "people"."doctor_id" > "people"."person_id"
+Ref: "people"."hospital_id" > "hospitals"."hospital_id"
 Ref: "prescriptions"."patient_id" > "people"."person_id"
 Ref: "prescriptions"."doctor_id" > "people"."person_id"
