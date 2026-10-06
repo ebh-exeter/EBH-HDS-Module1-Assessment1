@@ -21,7 +21,7 @@ while :; do
 
   mapfile -t min_max < <(echo "SELECT MIN(hospital_id) AS lower_range, MAX(hospital_id) AS upper_range FROM hospitals;" | mysql -u$USERNAME -p$PASSWORD -BN --vertical HospitalNetworkDB 2>/dev/null)
 
-  echo "Please enter the id of the Patient:"
+  echo "Please enter the id of the Hospital:"
   echo "Range between "${min_max[1]}" and "${min_max[2]}
   #get input
 
@@ -44,7 +44,7 @@ while :; do
     # Valid Entry
      echo "Doctors at "$hospitalName
      echo "SELECT name AS Doctors_Name, address AS Doctors_Address,date_of_birth AS Doctors_DOB_date FROM people WHERE hospital_id = "${entered_id}"  AND UPPER(role) = 'DOCTOR' ORDER BY name"  | mysql -u$USERNAME -p$PASSWORD -t HospitalNetworkDB 2>/dev/null
+   break 
    fi
-  break
   fi
 done
